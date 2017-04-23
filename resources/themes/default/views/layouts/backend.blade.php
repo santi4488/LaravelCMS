@@ -15,8 +15,18 @@
           <li><a href="#">Item 3</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><span class="navbar-text">Hello, User</span></li>
-          <li><a href="#">Logout</a></li>
+          <li><span class="navbar-text">Hello, {{ $admin->name }}</span></li>
+          <li>
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+          </li>
         </ul>
       </div>
     </nav>

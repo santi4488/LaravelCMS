@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\View\Composers;
 use Illuminate\Support\ServiceProvider;
 use App\View\ThemeViewFinder;
 
@@ -14,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      $this->app['view']->composer('layouts.auth', Composers\AddStatusMessage::class);
+      $this->app['view']->composer('layouts.backend', Composers\AddAdminUser::class);
+
         $this->app['view']->setFinder($this->app['theme.finder']);
     }
 
@@ -28,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
           $finder = new ThemeViewFinder($app['files'], $app['config']['view.paths']);
 
           $config = $app['config']['cms.theme'];
+
+          $original_finder = $this->app['view']->getFinder();
+
+          $finder->setHints($original_finder->getHints());
 
           $finder->setBasePath($app['path.resources'] . '/' . $config['folder']);
           $finder->setActiveTheme($config['active']);

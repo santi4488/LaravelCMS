@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Auth;
 
 class ResetPasswordController extends Controller
 {
@@ -34,6 +36,16 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+      $this->redirectTo = route('backend.dashboard');
+      $this->middleware('guest');
+    }
+
+    protected function resetPassword($user, $password){
+      $user->forceFill([
+          'password' => $password,
+          'remember_token' => Str::random(60),
+      ])->save();
+
+      Auth::guard()->login($user);
     }
 }
