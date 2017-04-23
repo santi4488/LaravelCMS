@@ -19,6 +19,20 @@ Route::resource('backend/users', 'Backend\UsersController', [
 ]);
 
 
+Route::get('backend/pages/{page}/confirm', ['as' => 'backend.pages.confirm', 'uses' => 'Backend\PagesController@confirm']);
+Route::resource('backend/pages', 'Backend\PagesController', [
+  'names' => [
+    'index' => 'backend.pages.index',
+    'create' => 'backend.pages.create',
+    'store' => 'backend.pages.store',
+    'destroy' => 'backend.pages.destroy',
+    'update' => 'backend.pages.update',
+    'edit' => 'backend.pages.edit',
+    'show' => 'backend.pages.show',
+  ]
+]);
+
+
 Route::get('backend/dashboard', ['as' => 'backend.dashboard', 'uses' => 'Backend\DashboardController@index']);
 
 Route::get('/', function () {
