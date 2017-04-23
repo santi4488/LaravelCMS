@@ -13,7 +13,7 @@
           <li><a href="{{ route('backend.users.index') }}">Users</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><span class="navbar-text">Hello, {{ $admin->name }}</span></li>
+          <li><span class="navbar-text">Hello, {{ ($admin) ? $admin->name : 'None'}}</span></li>
           <li>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
@@ -31,6 +31,23 @@
     <div class="container">
       <div class="row div col-md-12">
         <h3>@yield('title')</h3>
+
+        @if($errors->any())
+          <div class="alert alert-danger">
+            <strong>We found some errors!</strong>
+            <ul>
+              @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+
+        @if($status)
+          <div class="alert alert-info">
+            {{ $status }}
+          </div>
+        @endif
 
         @yield('content')
       </div>

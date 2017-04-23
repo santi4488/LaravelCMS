@@ -5,6 +5,10 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Auth\Access\AuthorizationException;
+
+use Log;
 
 class Handler extends ExceptionHandler
 {
@@ -44,6 +48,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+      if($exception instanceof ModelNotFoundException){
+        return redirect()->back()->withErrors([
+          'error' => 'Could not find a matching record.'
+        ]);
+      }
+
+      if($exception instanceof AuthorizationException){
+        if($request->expectsJson()){
+
+        }
+        
+        if($request->is('backend/users/' . auth()->user()->id . '/confirm') || ($request->is('backend/users/' . auth()->user()->id) && $request->isMethod('delete'))){
+          return redirect()->back()->withErrors([
+            'error' => 'Unable to delete yourself.',
+          ]);
+        }
+
+      }
         return parent::render($request, $exception);
     }
 
