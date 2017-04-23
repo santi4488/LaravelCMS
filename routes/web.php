@@ -3,6 +3,17 @@ Route::group(['prefix' => 'auth'], function(){
   Auth::routes();
 });
 
+Route::get('backend/users/{users}/confirm', ['as' => 'backend.users.confirm', 'uses' => 'Backend\UsersController@confirm']);
+Route::resource('backend/users', 'Backend\UsersController', ['names' => [
+  'index' => 'backend.users.index',
+  'create' => 'backend.users.create',
+  'store' => 'backend.users.store',
+  'destroy' => 'backend.users.destroy',
+  'update' => 'backend.users.update',
+  'show' => 'backend.users.show',
+  'edit' => 'backend.users.edit',
+  ]]);
+
 
 Route::get('backend/dashboard', ['as' => 'backend.dashboard', 'uses' => 'Backend\DashboardController@index']);
 

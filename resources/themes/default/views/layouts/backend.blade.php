@@ -10,9 +10,7 @@
       <div class="container">
         <div class="navbar-header"><a href="/" class="navbar-brand">Laravel CMS</a></div>
         <ul class="nav navbar-nav">
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
+          <li><a href="{{ route('backend.users.index') }}">Users</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><span class="navbar-text">Hello, {{ $admin->name }}</span></li>
