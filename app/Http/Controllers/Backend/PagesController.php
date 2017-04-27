@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Models\Page;
+use App\Http\Requests;
+use Log;
 
 class PagesController extends Controller
 {
@@ -33,7 +35,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.create');
     }
 
     /**
@@ -42,9 +44,12 @@ class PagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\StorePageRequest $request)
     {
-        //
+      Log::info($request->only('title', 'uri', 'name', 'content'));
+        $this->pages->create($request->only('title', 'uri', 'name', 'content'));
+
+        return redirect(route('backend.pages.index'))->with('status', 'Page has been created!');
     }
 
     /**
@@ -66,7 +71,8 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        //
+      $page = $this->pages->findOrFail($id);
+        return view('backend.pages.edit', compact('page'));
     }
 
     /**
@@ -76,14 +82,20 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\UpdatePageRequest $request, $id)
     {
-        //
+      $page = $this->pages->findOrFail($id);
+
+      $page->fill($request->only('title', 'uri', 'name', 'content'))->save();
+
+      return redirect(route('backend.pages.edit', $page->id))->with('status', 'Page has been updated!');
     }
 
     public function confirm($id)
     {
+      $page = $this->pages->findOrFail($id);
 
+      return view('backend.pages.confirm', compact('page'));
     }
 
     /**
@@ -94,6 +106,10 @@ class PagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $page = $this->pages->findOrFail($id);
+
+        $page->delete();
+
+        return redirect(route('backend.pages.index'))->with('status', 'The page has been deleted.');
     }
 }

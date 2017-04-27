@@ -3,7 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>@yield('title') &mdash; Laravel CMS</title>
-    <link rel="stylesheet" href="{{ theme('/css/backend.css') }}">
+    <link rel="stylesheet" href="{{ theme('/css/app.css') }}">
+    <script type="text/javascript">
+      window.Laravel =
+      @php
+        echo json_encode([
+          'csrfToken' => csrf_token(),
+        ]);
+      @endphp
+    </script>
+    <script src="{{ theme('/js/app.js') }}"></script>
   </head>
   <body>
     <nav class="navbar navbar-static-top navbar-inverse">

@@ -19,7 +19,8 @@ class CreatePagesTable extends Migration
             $table->string('name')->nullable();
             $table->string('uri')->unique();
             $table->text('content');
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->default(DB::raw('now()'));
+            $table->timestamp('updated_at')->nullable()->default(DB::raw('now()'));
         });
     }
 

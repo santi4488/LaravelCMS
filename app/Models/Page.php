@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
+use Log;
 
 class Page extends Model
 {
@@ -18,5 +19,9 @@ class Page extends Model
       'content',
     ];
 
-
+    public function setNameAttribute($value)
+    {
+      Log::info($value);
+      $this->attributes['name'] = empty($value) ? $value : NULL;
+    }
 }

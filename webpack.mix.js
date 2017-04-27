@@ -15,4 +15,6 @@ const { mix } = require('laravel-mix');
 //    .sass('resources/assets/sass/app.scss', 'public/css');
 //
 mix.js('resources/themes/default/assets/js/app.js', 'public/themes/default/assets/js')
-  .sass('resources/themes/default/assets/sass/backend.scss', 'public/themes/default/assets/css');
+  // .copy('node_modules/font-awesome/fonts', 'resources/themes/default/assets/sass/fonts')
+  .copy('node_modules/simplemde/dist/simplemde.min.css', 'resources/themes/default/assets/sass/simplemde.css')
+  .sass('resources/themes/default/assets/sass/app.scss', 'public/themes/default/assets/css');
