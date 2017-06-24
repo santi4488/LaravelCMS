@@ -10,6 +10,7 @@
         <td>Title</td>
         <td>URI</td>
         <td>Name</td>
+        <td>Template</td>
         <td>Edit</td>
         <td>Delete</td>
       </tr>
@@ -23,10 +24,11 @@
         @foreach($pages as $page)
           <tr>
             <td>
-              <a href="{{ route('backend.pages.edit', $page->id) }}">{{ $page->title }}</a>
+              {!! $page->present()->linkToPaddedTitle(route('backend.pages.edit', $page->id)) !!}              
             </td>
             <td><a href="{{ url($page->uri) }}">{{ $page->present()->prettyUri }}</a></td>
             <td>{{$page->name or 'None'}}</td>
+            <td>{{$page->template or 'None'}}</td>
             <td>
               <a href="{{ route('backend.pages.edit', $page->id) }}">
                 <span class="glyphicon glyphicon-edit"></span>

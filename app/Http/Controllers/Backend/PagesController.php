@@ -24,8 +24,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-      $pages = $this->pages->all();
-        return view('backend.pages.index', compact('pages'));
+      $pages = $this->pages->defaultOrder()->get();
+      $templates = $this->getPageTemplates();
+        return view('backend.pages.index', compact('pages', 'templates'));
     }
 
     /**
@@ -35,7 +36,9 @@ class PagesController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.create');
+      $templates = $this->getPageTemplates();
+      $orderPages = $this->pages->all();
+        return view('backend.pages.create', compact('templates', 'orderPages'));
     }
 
     /**
@@ -71,8 +74,10 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
+      $templates = $this->getPageTemplates();
       $page = $this->pages->findOrFail($id);
-        return view('backend.pages.edit', compact('page'));
+      $orderPages = $this->pages->all();
+        return view('backend.pages.edit', compact('page', 'templates', 'orderPages'));
     }
 
     /**
@@ -85,8 +90,7 @@ class PagesController extends Controller
     public function update(Requests\UpdatePageRequest $request, $id)
     {
       $page = $this->pages->findOrFail($id);
-
-      $page->fill($request->only('title', 'uri', 'name', 'content'))->save();
+      $page->fill($request->only('title', 'uri', 'name', 'content', 'template'))->save();
 
       return redirect(route('backend.pages.edit', $page->id))->with('status', 'Page has been updated!');
     }
@@ -111,5 +115,11 @@ class PagesController extends Controller
         $page->delete();
 
         return redirect(route('backend.pages.index'))->with('status', 'The page has been deleted.');
+    }
+
+    protected function getPageTemplates(){
+      $templates = config('cms.templates');
+
+      return ['' => ''] + array_combine(array_keys($templates), array_keys($templates));
     }
 }
