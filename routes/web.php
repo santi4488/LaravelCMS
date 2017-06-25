@@ -32,6 +32,19 @@ Route::resource('backend/pages', 'Backend\PagesController', [
   ]
 ]);
 
+Route::get('backend/blog/{blog}/confirm', ['as' => 'backend.blog.confirm', 'uses' => 'Backend\BlogController@confirm']);
+Route::resource('backend/blog', 'Backend\BlogController', [
+  'names' => [
+    'index' => 'backend.blog.index',
+    'create' => 'backend.blog.create',
+    'store' => 'backend.blog.store',
+    'destroy' => 'backend.blog.destroy',
+    'update' => 'backend.blog.update',
+    'edit' => 'backend.blog.edit',
+    'show' => 'backend.blog.show',
+  ]
+]);
+
 
 Route::get('backend/dashboard', ['as' => 'backend.dashboard', 'uses' => 'Backend\DashboardController@index']);
 

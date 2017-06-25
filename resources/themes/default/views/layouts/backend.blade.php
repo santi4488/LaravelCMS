@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <title>@yield('title') &mdash; Laravel CMS</title>
     <link rel="stylesheet" href="{{ theme('/css/app.css') }}">
+    <style media="screen">
+    .table-hover > tbody > tr > .warning,
+    .table-hover > tbody > .warning > td,
+    .table-hover > tbody > .warning > th {
+    background-color: #FAF2CC !important;
+    }
+    </style>
     <script type="text/javascript">
       window.Laravel =
       @php
@@ -21,6 +28,7 @@
         <ul class="nav navbar-nav">
           <li><a href="{{ route('backend.users.index') }}">Users</a></li>
           <li><a href="{{ route('backend.pages.index') }}">Pages</a></li>
+          <li><a href="{{ route('backend.blog.index') }}">Blog Posts</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><span class="navbar-text">Hello, {{ ($admin) ? $admin->name : 'None'}}</span></li>

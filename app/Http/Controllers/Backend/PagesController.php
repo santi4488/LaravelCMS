@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Http\Requests;
 use Log;
+use LogicException;
 
 class PagesController extends Controller
 {
@@ -37,7 +38,7 @@ class PagesController extends Controller
     public function create()
     {
       $templates = $this->getPageTemplates();
-      $orderPages = $this->pages->all();
+      $orderPages = $this->pages->defaultOrder()->get();
         return view('backend.pages.create', compact('templates', 'orderPages'));
     }
 
@@ -50,7 +51,9 @@ class PagesController extends Controller
     public function store(Requests\StorePageRequest $request)
     {
       Log::info($request->only('title', 'uri', 'name', 'content'));
-        $this->pages->create($request->only('title', 'uri', 'name', 'content'));
+        $page = $this->pages->create($request->only('title', 'uri', 'name', 'content'));
+
+        $this->updatePageOrder($page, $request);
 
         return redirect(route('backend.pages.index'))->with('status', 'Page has been created!');
     }
@@ -76,7 +79,7 @@ class PagesController extends Controller
     {
       $templates = $this->getPageTemplates();
       $page = $this->pages->findOrFail($id);
-      $orderPages = $this->pages->all();
+      $orderPages = $this->pages->defaultOrder()->get();
         return view('backend.pages.edit', compact('page', 'templates', 'orderPages'));
     }
 
@@ -90,6 +93,10 @@ class PagesController extends Controller
     public function update(Requests\UpdatePageRequest $request, $id)
     {
       $page = $this->pages->findOrFail($id);
+      $response = $this->updatePageOrder($page, $request);
+      if($response){
+        return $response;
+      }
       $page->fill($request->only('title', 'uri', 'name', 'content', 'template'))->save();
 
       return redirect(route('backend.pages.edit', $page->id))->with('status', 'Page has been updated!');
@@ -112,6 +119,10 @@ class PagesController extends Controller
     {
         $page = $this->pages->findOrFail($id);
 
+        foreach ($page->descendants as $child) {
+          $child->saveAsRoot();
+        }
+
         $page->delete();
 
         return redirect(route('backend.pages.index'))->with('status', 'The page has been deleted.');
@@ -121,5 +132,18 @@ class PagesController extends Controller
       $templates = config('cms.templates');
 
       return ['' => ''] + array_combine(array_keys($templates), array_keys($templates));
+    }
+
+    protected function updatePageOrder(Page $page, Request $request){
+      if($request->has('order', 'orderPage')){
+        try{
+          $moved = $page->updateOrder($request->input('order'), $request->input('orderPage'));
+        }
+        catch(LogicException $e){
+          return redirect(route('backend.pages.edit', $page->id))->withInput()->withErrors([
+            'error' => $e->getMessage()
+          ]);
+        }
+      }
     }
 }

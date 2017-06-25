@@ -33,7 +33,23 @@ class Page extends Model
       $this->attributes['template'] = empty($value) ? NULL : $value;
     }
 
-    public function getPaddedTitle(){
-      return $this->presenter()->paddedTitle;
+    public function getPaddedTitleAttribute(){
+      $depth = Page::withDepth()->find($this->id)->depth;
+      return str_repeat('&nbsp;', $depth * 4) . $this->title;
+    }
+
+    public function updateOrder($order, $orderPage){
+      $orderPage = $this->findOrFail($orderPage);
+      if($order == 'before'){
+        $this->insertBeforeNode($orderPage);
+      }
+      elseif($order == 'after'){
+        $this->insertAfterNode($orderPage);
+      }
+      elseif ($order == 'childOf') {
+        $this->appendToNode($orderPage)->save();
+      }
+      Log::info($this);
+      return $this->hasMoved();
     }
 }

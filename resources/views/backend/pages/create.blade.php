@@ -54,7 +54,7 @@
         <select name="orderPage" id="" class="form-control">
           <option value=""></option>
           @foreach($orderPages->pluck('padded_title', 'id')->toArray() as $op)
-            <option value="{{$op}}">{{$op}}</option>
+            <option value="{{$key}}">{{$value}}</option>
           @endforeach
         </select>
       </div>
