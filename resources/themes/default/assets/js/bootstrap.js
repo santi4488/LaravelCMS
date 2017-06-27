@@ -13,6 +13,10 @@ require('bootstrap-sass');
 window.SimpleMDE = require('simplemde');
 
 
+require('moment');
+require('eonasdan-bootstrap-datetimepicker');
+
+
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

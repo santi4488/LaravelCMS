@@ -11,10 +11,14 @@ const { mix } = require('laravel-mix');
  |
  */
 
+var publicPath = 'public/themes/default/assets';
+var resourcePath = 'resources/themes/default/assets';
+
 // mix.js('resources/assets/js/app.js', 'public/js')
 //    .sass('resources/assets/sass/app.scss', 'public/css');
 //
-mix.js('resources/themes/default/assets/js/app.js', 'public/themes/default/assets/js')
-  // .copy('node_modules/font-awesome/fonts', 'resources/themes/default/assets/sass/fonts')
-  .copy('node_modules/simplemde/dist/simplemde.min.css', 'resources/themes/default/assets/sass/simplemde.css')
-  .sass('resources/themes/default/assets/sass/app.scss', 'public/themes/default/assets/css');
+mix.js(resourcePath + '/js/app.js', publicPath + '/js')
+  // .copy('node_modules/font-awesome/fonts', resourcePath + '/sass/fonts')
+  .copy('node_modules/simplemde/dist/simplemde.min.css', resourcePath + '/sass/simplemde.css')
+  .copy('node_modules/eonasdan-bootstrap-datetimepicker/src/sass/_bootstrap-datetimepicker.scss', resourcePath + '/sass/datepicker.scss')
+  .sass(resourcePath + '/sass/app.scss', publicPath + '/css');
