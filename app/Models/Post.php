@@ -22,7 +22,7 @@ class Post extends Model
     protected $dates = ['published_at'];
 
     public function setPublishedAtAttribute($value){
-      $this->attribute['published_at'] = $value ?: null;
+      $this->attributes['published_at'] = $value ?: null;
     }
 
     public function author(){
