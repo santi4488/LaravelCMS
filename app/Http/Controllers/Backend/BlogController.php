@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Log;
 
 class BlogController extends Controller
 {
@@ -99,7 +100,11 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = $this->posts->findOrFail($id);
+
+        $post->delete();
+
+        return redirect(route('backend.blog.index'))->with('status', 'Post has been deleted.');
     }
 
     /**
@@ -108,6 +113,8 @@ class BlogController extends Controller
      * @return
      */
     public function confirm($id){
+      $post = $this->posts->findOrFail($id);
 
+      return view('backend.blog.confirm', compact('post'));
     }
 }
