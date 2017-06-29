@@ -13,6 +13,8 @@ class BlogController extends Controller
 
   public function __construct(Post $posts){
     $this->posts = $posts;
+
+    parent::__construct();
   }
 
     /**
