@@ -3,8 +3,8 @@
   namespace App\Presenters;
 
   use Laracasts\Presenter\Presenter;
-  use App\Models\Page;
   use League\CommonMark\CommonMarkConverter;
+  use GrahamCampbell\Markdown\Facades\Markdown;
   use Log;
 
   /**
@@ -19,8 +19,10 @@
     }
 
     public function excerptHtml(){
-      // Log::info(empty($this->excerpt));
-      return (!empty($this->excerpt)) ? $this->markdown->convertToHtml($this->excerpt) : null;
+      // $excerpt = $this->excerpt;
+      return $this->excerpt ? Markdown::convertToHtml($this->excerpt) : null;
+
+      // return (!isset($excerpt) || trim($excerpt) === '') ? null : Markdown::convertToHtml($excerpt);
     }
 
     public function bodyHtml(){

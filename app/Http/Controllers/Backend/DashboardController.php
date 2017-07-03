@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Post;
+use App\Models\User;
 
 /**
  *
@@ -10,9 +11,11 @@ use App\Models\Post;
 class DashboardController extends Controller
 {
 
-  public function index(Post $posts){
-    $posts = $posts->orderBy('updated_at', 'desc')->take(5)->get();
+  public function index(Post $posts, User $users){
+    $posts = $posts->orderByRaw('updated_at DESC NULLS LAST')->take(5)->get();
 
-    return view('backend.dashboard', compact('posts'));
+    $users = $users->whereNotNull('last_login_at')->orderByRaw('last_login_at DESC NULLS LAST')->take(5)->get();
+
+    return view('backend.dashboard', compact('posts', 'users'));
   }
 }

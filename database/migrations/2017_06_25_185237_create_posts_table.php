@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             $table->integer('author_id');
             $table->string('title');
             $table->string('slug');
-            $table->text('body');
-            $table->text('excerpt');
+            $table->text('body')->nullable();
+            $table->text('excerpt')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
