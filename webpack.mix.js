@@ -21,4 +21,5 @@ mix.js(resourcePath + '/js/app.js', publicPath + '/js')
   // .copy('node_modules/font-awesome/fonts', resourcePath + '/sass/fonts')
   .copy('node_modules/simplemde/dist/simplemde.min.css', resourcePath + '/sass/simplemde.css')
   .copy('node_modules/eonasdan-bootstrap-datetimepicker/src/sass/_bootstrap-datetimepicker.scss', resourcePath + '/sass/datepicker.scss')
-  .sass(resourcePath + '/sass/app.scss', publicPath + '/css');
+  .sass(resourcePath + '/sass/app_backend.scss', publicPath + '/css/backend.css')
+  .sass(resourcePath + '/sass/app_frontend.scss', publicPath + '/css/frontend.css');

@@ -1,4 +1,5 @@
 {
   "/themes/default/assets/js/app.js": "/themes/default/assets/js/app.js",
-  "/themes/default/assets/css/app.css": "/themes/default/assets/css/app.css"
+  "/themes/default/assets/css/backend.css": "/themes/default/assets/css/backend.css",
+  "/themes/default/assets/css/frontend.css": "/themes/default/assets/css/frontend.css"
 }

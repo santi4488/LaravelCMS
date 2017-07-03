@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>@yield('title') &mdash; Laravel CMS</title>
-    <link rel="stylesheet" href="{{ theme('/css/app.css') }}">
+    <link rel="stylesheet" href="{{ theme('/css/backend.css') }}">
     <style media="screen">
     .table-hover > tbody > tr > .warning,
     .table-hover > tbody > .warning > td,

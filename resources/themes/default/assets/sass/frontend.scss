@@ -1,0 +1,13 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+a.navbar-brand{
+  padding: 9px 15px;
+
+  img{
+    height: 32px;
+  }
+}
+
+.dropdown:hover > .dropdown-menu{
+  display: block;
+}
