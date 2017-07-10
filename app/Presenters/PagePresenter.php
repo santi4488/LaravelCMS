@@ -4,6 +4,7 @@
 
   use Laracasts\Presenter\Presenter;
   use App\Models\Page;
+  use GrahamCampbell\Markdown\Facades\Markdown;
   use Log;
 
   /**
@@ -29,5 +30,9 @@
 
     public function uriWildcard(){
       return $this->uri . '*';
+    }
+
+    public function contentHtml(){
+      return Markdown::convertToHtml($this->content);
     }
   }
