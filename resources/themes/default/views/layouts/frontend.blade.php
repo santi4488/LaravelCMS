@@ -14,9 +14,7 @@
           </a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
+          @include('partials.navigation')
         </ul>
       </div>
     </nav>

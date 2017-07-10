@@ -26,4 +26,8 @@
       $depth = Page::withDepth()->find($this->id)->depth;
       return str_repeat('&nbsp;', $depth * 4) . $this->title;
     }
+
+    public function uriWildcard(){
+      return $this->uri . '*';
+    }
   }
