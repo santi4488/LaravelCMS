@@ -5,7 +5,7 @@
     <title>@yield('title') &mdash; Laravel CMS</title>
     <link rel="stylesheet" type="text/css" href="{{theme('/css/frontend.css')}}">
   </head>
-  <body>
+  <body id="app">
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">

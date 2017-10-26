@@ -53,8 +53,8 @@
       <div class="col-md-5">
         <select name="orderPage" id="" class="form-control">
           <option value=""></option>
-          @foreach($orderPages->pluck('padded_title', 'id')->toArray() as $op)
-            <option value="{{$key}}">{{$value}}</option>
+          @foreach($orderPages->pluck('padded_title', 'id')->toArray() as $key => $op)
+            <option value="{{$key}}">{{$op}}</option>
           @endforeach
         </select>
       </div>
@@ -63,6 +63,14 @@
     <div class="form-group">
       <label for="content">Content</label>
       <textarea rows="10" class="form-control" value="" name="content"></textarea>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        {!! Form::checkbox('hidden') !!}
+        Hide page from navigation
+        <span class="help-block">Checking this will hide the page from the navigation.  Can only be applied to pages without children.</span>
+      </label>
     </div>
 
     <button type="submit" class="btn btn-primary">Create Page</button>

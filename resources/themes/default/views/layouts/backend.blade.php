@@ -21,7 +21,7 @@
     </script>
     <script src="{{ theme('/js/app.js') }}"></script>
   </head>
-  <body>
+  <body id="app">
     <nav class="navbar navbar-static-top navbar-inverse">
       <div class="container">
         <div class="navbar-header"><a href="/" class="navbar-brand">Laravel CMS</a></div>

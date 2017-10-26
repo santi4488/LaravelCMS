@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>@yield('title') &mdash; Laravel CMS</title>
-    <link rel="stylesheet" href="{{ theme('/css/app.css') }}">
+    <link rel="stylesheet" href="{{ theme('/css/backend.css') }}">
     <script type="text/javascript">
       window.Laravel =
       @php
@@ -15,9 +15,8 @@
     <script src="{{ theme('/js/app.js') }}"></script>
   </head>
   <body>
-    <div class="container">
+    <div id="app" class="container">
       <div class="row vertical-center">
-        <div class="col-md-4"></div>
         <div class="col-md-4">
           <div class="panel panel-{{$errors->any() ? 'danger' : 'default'}}">
             <div class="panel-heading">
@@ -46,7 +45,6 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4"></div>
       </div>
     </div>
   </body>

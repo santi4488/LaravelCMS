@@ -38,7 +38,7 @@ class PagesController extends Controller
     public function create()
     {
       $templates = $this->getPageTemplates();
-      $orderPages = $this->pages->defaultOrder()->get();
+      $orderPages = $this->pages->where('hidden', false)->get();
         return view('backend.pages.create', compact('templates', 'orderPages'));
     }
 
@@ -50,8 +50,7 @@ class PagesController extends Controller
      */
     public function store(Requests\StorePageRequest $request)
     {
-      Log::info($request->only('title', 'uri', 'name', 'content'));
-        $page = $this->pages->create($request->only('title', 'uri', 'name', 'content'));
+        $page = $this->pages->create($request->only('title', 'uri', 'name', 'content', 'template', 'hidden'));
 
         $this->updatePageOrder($page, $request);
 
@@ -79,7 +78,7 @@ class PagesController extends Controller
     {
       $templates = $this->getPageTemplates();
       $page = $this->pages->findOrFail($id);
-      $orderPages = $this->pages->defaultOrder()->get();
+      $orderPages = $this->pages->defaultOrder()->where('hidden', false)->get();
         return view('backend.pages.edit', compact('page', 'templates', 'orderPages'));
     }
 
@@ -97,7 +96,8 @@ class PagesController extends Controller
       if($response){
         return $response;
       }
-      $page->fill($request->only('title', 'uri', 'name', 'content', 'template'))->save();
+      Log::info($request->only('title', 'uri', 'name', 'content', 'template', 'hidden'));
+      $page->fill($request->only('title', 'uri', 'name', 'content', 'template', 'hidden'))->save();
 
       return redirect(route('backend.pages.edit', $page->id))->with('status', 'Page has been updated!');
     }

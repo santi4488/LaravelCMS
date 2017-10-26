@@ -19,7 +19,7 @@ class InjectPages
   }
 
   public function compose(View $view){
-    $pages = $this->pages->defaultOrder()->get()->toTree();
+    $pages = $this->pages->defaultOrder()->where('hidden', false)->get()->toTree();
     $view->with('pages', $pages);
   }
 }

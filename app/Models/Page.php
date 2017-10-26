@@ -19,17 +19,16 @@ class Page extends Model
       'uri',
       'content',
       'template',
+      'hidden'
     ];
 
     public function setNameAttribute($value)
     {
-      Log::info($value);
       $this->attributes['name'] = empty($value) ? NULL : $value;
     }
 
     public function setTemplateAttribute($value)
     {
-      Log::info($value);
       $this->attributes['template'] = empty($value) ? NULL : $value;
     }
 
@@ -49,7 +48,10 @@ class Page extends Model
       elseif ($order == 'childOf') {
         $this->appendToNode($orderPage)->save();
       }
-      Log::info($this);
       return $this->hasMoved();
+    }
+
+    public function setHiddenAttribute($value){
+      $this->attributes['hidden'] = $value ?: 0;
     }
 }

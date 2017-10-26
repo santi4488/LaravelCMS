@@ -72,6 +72,14 @@
       <textarea rows="10" class="form-control" name="content">{{ $page->content }}</textarea>
     </div>
 
+    <div class="checkbox">
+      <label>
+        {!! Form::checkbox('hidden', true) !!}
+        Hide page from navigation
+        <span class="help-block">Checking this will hide the page from the navigation.  Can only be applied to pages without children.</span>
+      </label>
+    </div>
+
     <button type="submit" class="btn btn-primary">Save Page</button>
   </form>
 
