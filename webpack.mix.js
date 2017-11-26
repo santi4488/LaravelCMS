@@ -17,7 +17,8 @@ var resourcePath = 'resources/themes/default/assets';
 // mix.js('resources/assets/js/app.js', 'public/js')
 //    .sass('resources/assets/sass/app.scss', 'public/css');
 //
-mix.js(resourcePath + '/js/app.js', publicPath + '/js')
+mix.js(resourcePath + '/js/backend/app.js', publicPath + '/js/backend')
+  .js(resourcePath + '/js/frontend/app.js', publicPath + '/js/frontend')
   // .copy('node_modules/font-awesome/fonts', resourcePath + '/sass/fonts')
   .copy('node_modules/simplemde/dist/simplemde.min.css', resourcePath + '/sass/simplemde.css')
   .copy('node_modules/eonasdan-bootstrap-datetimepicker/src/sass/_bootstrap-datetimepicker.scss', resourcePath + '/sass/datepicker.scss')
