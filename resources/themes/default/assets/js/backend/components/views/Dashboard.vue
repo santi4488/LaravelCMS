@@ -24,11 +24,8 @@
 
 <script>
   import moment from 'moment'
-  
+
   export default {
-    components: {
-      markdown: Markdown,
-    },
     props: {
       posts: {
         type: [Object, Array],
