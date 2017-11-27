@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') &mdash; Laravel CMS</title>
     <link rel="stylesheet" href="{{ theme('/css/backend.css') }}">
     <style media="screen">
@@ -19,56 +20,58 @@
         ]);
       @endphp
     </script>
-    <script src="{{ theme('/js/app.js') }}"></script>
+    <script src="{{ theme('/js/backend/app.js') }}"></script>
   </head>
-  <body id="app">
-    <nav class="navbar navbar-static-top navbar-inverse">
-      <div class="container">
-        <div class="navbar-header"><a href="/" class="navbar-brand">Laravel CMS</a></div>
-        <ul class="nav navbar-nav">
-          <li><a href="{{ route('backend.dashboard') }}">Dashboard</a></li>
-          <li><a href="{{ route('backend.users.index') }}">Users</a></li>
-          <li><a href="{{ route('backend.pages.index') }}">Pages</a></li>
-          <li><a href="{{ route('backend.blog.index') }}">Blog Posts</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><span class="navbar-text">Hello, {{ ($admin) ? $admin->name : 'None'}}</span></li>
-          <li>
-            <a href="{{ route('logout') }}"
+  <body>
+    <div id="app">
+      <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container">
+          <div class="navbar-header"><a href="/" class="navbar-brand">Laravel CMS</a></div>
+          <ul class="nav navbar-nav">
+            <li><a href="{{ route('backend.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ route('backend.users.index') }}">Users</a></li>
+            <li><a href="{{ route('backend.pages.index') }}">Pages</a></li>
+            <li><a href="{{ route('backend.blog.index') }}">Blog Posts</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><span class="navbar-text">Hello, {{ ($admin) ? $admin->name : 'None'}}</span></li>
+            <li>
+              <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">
+                document.getElementById('logout-form').submit();">
                 Logout
-            </a>
+              </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
-            </form>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container">
-      <div class="row div col-md-12">
-        <h3>@yield('title')</h3>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row div col-md-12">
+          <h3>@yield('title')</h3>
 
-        @if($errors->any())
+          @if($errors->any())
           <div class="alert alert-danger">
             <strong>We found some errors!</strong>
             <ul>
               @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
+              <li>{{ $error }}</li>
               @endforeach
             </ul>
           </div>
-        @endif
+          @endif
 
-        @if($status)
+          @if($status)
           <div class="alert alert-info">
             {{ $status }}
           </div>
-        @endif
+          @endif
 
-        @yield('content')
+          @yield('content')
+        </div>
       </div>
     </div>
   </body>

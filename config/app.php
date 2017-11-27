@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Chicago',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        GrahamCampbell\GitHub\GitHubServiceProvider::class,
 
 
     ],
@@ -231,7 +232,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
-
+        'Github' => GrahamCampbell\GitHub\Facades\GitHub::class,
     ],
 
 ];

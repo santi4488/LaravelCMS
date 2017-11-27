@@ -62,7 +62,7 @@
 
     <div class="form-group">
       <label for="content">Content</label>
-      <textarea rows="10" class="form-control" value="" name="content"></textarea>
+      <textarea rows="10" class="form-control" name="content"></textarea>
     </div>
 
     <div class="checkbox">
@@ -77,7 +77,32 @@
   </form>
 
   <script type="text/javascript">
-    new SimpleMDE().render();
+    let mdeConfig = {
+        toolbar:[
+          {
+            name: 'bold',
+            action: SimpleMDE.toggleBold,
+            className: 'fa fa-bold',
+            title: "Bold",
+          },
+          {
+            name: 'italic',
+            action: SimpleMDE.toggleItalic,
+            className: 'fa fa-bold',
+            title: 'Italic',
+          },
+          {
+            name: 'imageUpload',
+            action: function selectImage(editor) {
+
+            },
+            className: "fa fa-upload",
+            title: 'Upload Image',
+          }
+        ]
+    }
+    let mde = new SimpleMDE(mdeConfig)
+    mde.render()
   </script>
 
 @endsection

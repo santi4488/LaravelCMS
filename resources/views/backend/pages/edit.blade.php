@@ -82,8 +82,4 @@
 
     <button type="submit" class="btn btn-primary">Save Page</button>
   </form>
-
-  <script type="text/javascript">
-    new SimpleMDE().render();
-  </script>
 @endsection

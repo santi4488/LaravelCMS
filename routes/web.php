@@ -47,3 +47,7 @@ Route::resource('backend/blog', 'Backend\BlogController', [
 
 
 Route::get('backend/dashboard', ['as' => 'backend.dashboard', 'uses' => 'Backend\DashboardController@index']);
+
+Route::get('backend', function() {
+  return redirect('backend/dashboard');
+});
