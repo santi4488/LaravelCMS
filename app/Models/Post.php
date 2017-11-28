@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\Model;
+use GrahamCampbell\Markdown\Facades\Markdown;
+use Log;
 
 class Post extends Model
 {
