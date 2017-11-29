@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="/" class="navbar-brand">
-            <img src="{{theme('/images/logo.png')}}" alt="Laravel CMS">
+            <img src="{{theme('/images/my_logo.png')}}" alt="Laravel CMS">
           </a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false">
             <span class="sr-only">Toggle Navigation</span>
