@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12" style="background-image: url({{ theme('/images/explorations.jpg') }}); background-repeat: no-repeat; background-position: center center; background-size: cover; height: 320px;"></div>
+  <div class="col-md-12"></div>
 </div>
 <div class="row">
   @foreach($posts as $post)

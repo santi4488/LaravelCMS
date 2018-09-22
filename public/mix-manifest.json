@@ -1,6 +1,5 @@
 {
-  "/themes/default/assets/js/backend/app.js": "/themes/default/assets/js/backend/app.js",
+  "/themes/default/assets/js/frontend/app.js": "/themes/default/assets/js/frontend/app.js",
   "/themes/default/assets/css/backend.css": "/themes/default/assets/css/backend.css",
-  "/themes/default/assets/css/frontend.css": "/themes/default/assets/css/frontend.css",
-  "/themes/default/assets/js/frontend/app.js": "/themes/default/assets/js/frontend/app.js"
+  "/themes/default/assets/css/frontend.css": "/themes/default/assets/css/frontend.css"
 }
